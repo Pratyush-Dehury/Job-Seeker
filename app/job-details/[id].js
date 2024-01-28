@@ -29,7 +29,11 @@ const JobDetails = () => {
   const router = useRouter();
   const [refreshing, setRefreshing] = useState(false);
   const [activeTab, setActiveTab] = useState(tabs[0]);
-  const onRefresh = useCallback(() => {});
+  const onRefresh = useCallback(() => {
+    setRefreshing(true);
+    refetch();
+    setRefreshing(false);
+  });
   const displayTabContent = () => {
     switch (activeTab) {
       case "Qualifications":
@@ -103,7 +107,11 @@ const JobDetails = () => {
           </View>
         )}
       </ScrollView>
-      <JobFooter url={data[0]?.job_google_link ?? 'http://careers.google.com/jobs/result'} />
+      <JobFooter
+        url={
+          data[0]?.job_google_link ?? "http://careers.google.com/jobs/result"
+        }
+      />
     </SafeAreaView>
   );
 };
